@@ -6,5 +6,6 @@ FactoryGirl.define do
     due_date Faker::Date.forward(365)
     completion_date Faker::Date.backward(100)
     completed false
+    visible false
   end
 end
