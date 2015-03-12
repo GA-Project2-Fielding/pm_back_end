@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-    def sign_in
+  def sign_in
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       render json: {token: user.token}
@@ -25,5 +25,10 @@ class UsersController < ApplicationController
   end
 
 
+  private
+
+  def user_params
+    params.require(:user).permit(:user_name, :email, :first_name, :last_name, :password, :image_url, :description, :token)
+  end
 
 end
