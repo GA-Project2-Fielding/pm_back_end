@@ -18,12 +18,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def index
-    auth_header = request.headers['AUTHORIZATION'].to_s
-    @user = User.where(token: auth_header).take
-    render json: @user
-  end
-
   def show
     @user = User.find(params[:id])
     render json: @user, status: 200
