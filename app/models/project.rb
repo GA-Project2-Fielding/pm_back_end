@@ -11,6 +11,6 @@ class Project < ActiveRecord::Base
 
   def defaults
    self.completed = false if self.completed.nil?
-   self.visible = false if self.visible.nil?
+   self.visible = true if self.visible.nil?
   end
 end
