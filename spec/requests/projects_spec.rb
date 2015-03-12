@@ -54,6 +54,14 @@ describe 'Projects Requests' do
     end
   end
 
+  describe '#destroy' do
+    it 'should destroy a project' do
+      @project = @projects.first
+      delete "/projects/#{@project.id}"
+      expect(response.status).to eq 204
+    end
+  end
+
 
 
 
