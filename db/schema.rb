@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312150604) do
+ActiveRecord::Schema.define(version: 20150312162344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,8 +30,10 @@ ActiveRecord::Schema.define(version: 20150312150604) do
     t.text    "body"
     t.integer "task_id"
     t.integer "user_id"
+    t.integer "supercomment_id"
   end
 
+  add_index "comments", ["supercomment_id"], name: "index_comments_on_supercomment_id", using: :btree
   add_index "comments", ["task_id"], name: "index_comments_on_task_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
@@ -58,16 +60,18 @@ ActiveRecord::Schema.define(version: 20150312150604) do
 
   create_table "tasks", force: :cascade do |t|
     t.datetime "due_date"
-    t.boolean  "completed",   default: false, null: false
-    t.integer  "priority",    default: 0,     null: false
-    t.string   "title",                       null: false
+    t.boolean  "completed",    default: false, null: false
+    t.integer  "priority",     default: 0,     null: false
+    t.string   "title",                        null: false
     t.text     "description"
     t.integer  "project_id"
+    t.integer  "supertask_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "tasks", ["project_id"], name: "index_tasks_on_project_id", using: :btree
+  add_index "tasks", ["supertask_id"], name: "index_tasks_on_supertask_id", using: :btree
 
   create_table "user_tasks", force: :cascade do |t|
     t.integer "user_id"
@@ -87,6 +91,7 @@ ActiveRecord::Schema.define(version: 20150312150604) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "token",           null: false
   end
 
   add_foreign_key "collaborators", "projects"
