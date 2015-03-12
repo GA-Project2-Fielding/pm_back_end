@@ -1,5 +1,4 @@
 class Collaborator < ActiveRecord::Base
-  validates :owner, presence: true
   after_initialize :defaults
 
   belongs_to :user
