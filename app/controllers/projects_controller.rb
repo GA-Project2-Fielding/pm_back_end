@@ -5,5 +5,10 @@ class ProjectsController < ApplicationController
     render json: @projects, status: 200
   end
 
+  def show
+    @project = Project.find(params[:id])
+    render json: @project, status: 200
+  end
+
 
 end

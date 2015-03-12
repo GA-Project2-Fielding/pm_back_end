@@ -17,6 +17,16 @@ describe 'Projects Requests' do
     end
   end
 
+  describe '#show' do
+    it 'should retrieve a single project by id and return json' do
+    @project = @projects.first
+    get "/projects/#{@project.id}"
+    expect(response).to be_success
+    project = JSON.parse(response.body)
+    expect(project['project_title']).to eq @project.project_title
+    end
+  end
+
 
 
 
