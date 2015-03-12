@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
   def create
     @comment = Task.find(params[:task_id]).comments.new(comment_params)
     if @comment.save(comment_params)
-      render json: @comment, status: :created, location @comment
+      render json: @comment, status: :created, location: @comment
     else
       render json: @comment.errors, status: :unprocessable_entity
     end
