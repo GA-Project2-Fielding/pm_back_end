@@ -7,6 +7,7 @@ class CreateTasks < ActiveRecord::Migration
       t.string :title, null: false
       t.text :description
       t.belongs_to :project, index: true
+      t.references :supertask, index: true
 
       t.timestamps
     end
