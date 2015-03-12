@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  shallow do
+    resources :users, except: [:new, :edit] do
+      resources :projects, except: [:new, :edit] do
+        resources :tasks, except: [:new, :edit] do
+          resources :files, except: [:new, :edit, :update]
+          resources :comments, except: [:new, :edit]
+        end
+      end
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
