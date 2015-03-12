@@ -10,5 +10,30 @@ class ProjectsController < ApplicationController
     render json: @project, status: 200
   end
 
+  def create
+    @user = User.find(params[:user_id])
+    @project = Project.new(project_params)
+    @user.projects << @project
+    if @project.save
+      render json: @project, status: :created
+    else
+      render json: @project.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    @project = Project.find(params[:id])
+    if @project.update(project_params)
+      render json: @project, status: 200
+    else
+      render json: @project.errors, status: :unprocessable_entity
+    end
+  end
+
+private
+
+def project_params
+  params.require(:project).permit(:project_title, :description, :start_date, :due_date, :completion_date, :completed, :visible)
+end
 
 end

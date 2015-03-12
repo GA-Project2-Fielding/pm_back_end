@@ -27,6 +27,33 @@ describe 'Projects Requests' do
     end
   end
 
+  describe '#create' do
+    it 'should create a new project associated with a user' do
+    post "/users/#{@users.first.id}/projects",
+    { project: { project_title: 'Inceptos Ullamcorper', description: 'Nulla vitae elit libero, a pharetra augue. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.', start_date: '2014-06-13', due_date: '2014-08-20', completion_date: '2014-07-21', completed: true, visible: false }
+      }.to_json,
+      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+      expect(response).to be_success
+      expect(response.content_type).to be Mime::JSON
+      project = JSON.parse(response.body)
+      expect(project['project_title']).to eq 'Inceptos Ullamcorper'
+    end
+  end
+
+  describe '#update' do
+    it 'should update a project' do
+      @project = @projects.first
+      patch "/projects/#{@project.id}",
+      { project: { project_title: 'Euismod Lorem'}
+      }.to_json,
+      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+      expect(response).to be_success
+      expect(response.content_type).to be Mime::JSON
+      project = JSON.parse(response.body)
+      expect(project['project_title']).to eq 'Euismod Lorem'
+    end
+  end
+
 
 
 
