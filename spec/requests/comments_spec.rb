@@ -1,6 +1,5 @@
 require 'rails_helper'
 require 'database_cleaner'
-require 'byebug'
 DatabaseCleaner.strategy = :truncation
 
 describe 'Comments Requests' do
