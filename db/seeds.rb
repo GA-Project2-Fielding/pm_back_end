@@ -14,10 +14,8 @@ Project.first.tasks.create(title: 'patty cake', due_date: DateTime.now)
 Project.first.tasks.create(title: 'patty cake', due_date: DateTime.now)
 
 # Creating one child tasks for the first project's first task
-# id = Project.first.project_id
-# Project.first.tasks.first.subtasks.create(title: "Baker's flippin man!", due_date: DateTime.now, project_id: id)
 
-Project.first.tasks.first.create_subtask("WORKKKKKK!")
+Project.first.tasks.first.create_subtask("WORKKKKKK!", DateTime.now)
 
 # Creating one child task for the above child task
 # Project.all[0].tasks.all[0].subtasks.all[0].create(title: "BAKE ME THAT DAMN CAKE!!", due_date: DateTime.now)
