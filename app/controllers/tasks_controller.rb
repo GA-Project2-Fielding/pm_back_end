@@ -20,6 +20,15 @@ class TasksController < ApplicationController
     end
   end
 
+  def subtasks
+    @subtask = Task.find(params[:id]).new_subtask(task_params)
+    if @subtask.save
+      render json: @subtask, status: :created, location: @subtask
+    else
+      render json: @subtask.errors, status: :unprocessable_entity
+    end
+  end
+
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)

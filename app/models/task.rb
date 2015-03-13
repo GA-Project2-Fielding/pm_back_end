@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Task <ActiveRecord::Base
   belongs_to :project
   has_many :comments, dependent: :destroy
@@ -21,9 +23,16 @@ class Task <ActiveRecord::Base
     self.completed = false if self.completed.nil?
   end
 
-  def create_subtask(title, due_date, completed: false, priority: 0, description: nil)
+  def new_subtask(task_params)
+    due_date = task_params['due_date']
+    completed = task_params['completed']
+    title = task_params['title']
+    description = task_params['description']
+
+    due_date_date = DateTime.strptime(due_date, '%Y-%m-%d %T')
+
     id = self.project_id
-    self.subtasks.create(title: title, due_date: due_date, project_id: id, completed: completed, priority: priority, description: description)
+    self.subtasks.new(due_date: DateTime.now, title: title, completed: completed, description:description, project_id: id)
   end
 
    def subtask?
