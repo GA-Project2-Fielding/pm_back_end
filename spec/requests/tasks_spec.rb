@@ -27,7 +27,13 @@ describe 'Tasks requests' do
       get "/tasks/#{@task.id}"
       expect(response).to be_success
       task_json = JSON.parse(response.body)
+      expect(task_json['id']).to eq @task.id
+      expect(task_json['completed']).to eq @task.completed
+      expect(task_json['priority']).to eq @task.priority
+      expect(task_json['priority']).to eq @task.priority
       expect(task_json['title']).to eq @task.title
+      expect(task_json['title']).to eq @task.title
+      expect(task_json['description']).to eq @task.description
     end
   end
 
