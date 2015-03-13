@@ -1,4 +1,4 @@
-class Task <ActiveRecord::Base
+class Task < ActiveRecord::Base
   belongs_to :project
   has_many :comments, dependent: :destroy
   has_many :user_tasks
