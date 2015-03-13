@@ -52,4 +52,19 @@ describe 'Tasks requests' do
     end
   end
 
+  describe '#update' do
+    it 'should update a project' do
+      patch "/tasks/#{@task.id}",
+      { task: { title: 'new title' } }.to_json,
+      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+      expect(response).to be_success
+      expect(response.content_type).to be Mime::JSON
+      task_json = JSON.parse(response.body)
+      expect(task_json['title']).to eq 'new title'
+      expect(task_json['id']).to eq @task.id
+    end
+  end
+
+
+
 end
