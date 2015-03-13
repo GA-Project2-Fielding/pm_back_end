@@ -16,7 +16,7 @@ describe 'Tasks requests' do
 
   describe '#index' do
     it 'gets all the tasks for a project' do
-      get "/projects/#{@project.id}/tasks"
+      get "/projects/#{@project.id}/tasks", nil, {'authorization' => "Token token=#{@users.first.token}"}
       expect(response).to be_success
       tasks_json = JSON.parse(response.body)
       expect(tasks_json.length).to eq 5
@@ -25,7 +25,7 @@ describe 'Tasks requests' do
 
   describe '#show' do
     it 'should retrieve a single task by id and return json' do
-      get "/tasks/#{@task.id}"
+      get "/tasks/#{@task.id}", nil, {'authorization' => "Token token=#{@users.first.token}"}
       expect(response).to be_success
       task_json = JSON.parse(response.body)
       expect(task_json['id']).to eq @task.id
@@ -41,7 +41,7 @@ describe 'Tasks requests' do
       post "/projects/#{@project.id}/tasks",
       { task: { due_date: '2015-12-12', completed: false, priority: 5, title: 'task title', description: 'task description' }
       }.to_json,
-      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s, 'authorization' => "Token token=#{@users.first.token}" }
       expect(response).to be_success
       expect(response.content_type).to be Mime::JSON
       task_json = JSON.parse(response.body)
@@ -57,7 +57,7 @@ describe 'Tasks requests' do
     it 'should update a project' do
       patch "/tasks/#{@task.id}",
       { task: { title: 'new title' } }.to_json,
-      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s,'authorization' => "Token token=#{@users.first.token}" }
       expect(response).to be_success
       expect(response.content_type).to be Mime::JSON
       task_json = JSON.parse(response.body)
@@ -68,7 +68,12 @@ describe 'Tasks requests' do
 
   describe '#destroy' do
     it 'should destroy a task' do
+<<<<<<< HEAD
       delete "/tasks/#{@task.id}"
+=======
+      tasks_count = @project.tasks.length
+      delete "/tasks/#{@task.id}", nil, {'authorization' => "Token token=#{@users.first.token}"}
+>>>>>>> added Authorization token to request headers for project and task specs
       expect(response.status).to eq 204
       expect(Task.all).not_to include @task
     end
