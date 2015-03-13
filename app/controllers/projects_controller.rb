@@ -13,9 +13,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @project = Project.new(project_params)
-    @user.projects << @project
+    @project = User.find(params[:user_id]).projects.new(project_params)
     if @project.save
       render json: @project, status: :created
     else
