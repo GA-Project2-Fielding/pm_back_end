@@ -8,9 +8,9 @@ FactoryGirl.define do
     end
     first_name Faker::Name.first_name
     last_name Faker::Name.last_name
-    password_digest "903njkweuhri2u3ewrh874"
+    password Faker::Lorem.word
     image_url "http://imgur.com/3489274"
     description Faker::Lorem.sentence
-    token "kjfnsj4958235njkndskjfh"
+    token "a47a8e54b11c4de5a4a351734c80a14a"
   end
 end
