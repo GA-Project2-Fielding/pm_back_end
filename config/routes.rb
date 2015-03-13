@@ -8,7 +8,11 @@ Rails.application.routes.draw do
             post 'subtasks'
           end
           resources :files, except: [:new, :edit, :update]
-          resources :comments, except: [:new, :edit]
+          resources :comments, except: [:new, :edit]do
+            member do
+              post 'subcomments'
+            end
+          end
         end
       end
     end
