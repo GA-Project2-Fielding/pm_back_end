@@ -12,12 +12,14 @@ describe 'Projects Requests' do
 
   describe '#index' do
     it 'gets all the projects for a user' do
-      @user = @users.first
-      @user.projects << FactoryGirl.create_list(:project, 5)
+      # @user = @users.first
+      # @user.projects << FactoryGirl.create_list(:project, 5)
+      create(:project, :with_users)
+      @user = user.first
       get "/users/#{@user.id}/projects"
       expect(response).to be_success
       projects_json = JSON.parse(response.body)
-      expect(projects_json.length).to eq 5
+      expect(projects_json.length).to eq 1
     end
   end
 
