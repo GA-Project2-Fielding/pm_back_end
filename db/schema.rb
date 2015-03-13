@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312204753) do
+ActiveRecord::Schema.define(version: 20150313193858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,10 +27,12 @@ ActiveRecord::Schema.define(version: 20150312204753) do
   add_index "collaborators", ["user_id"], name: "index_collaborators_on_user_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
-    t.text    "body"
-    t.integer "task_id"
-    t.integer "user_id"
-    t.integer "supercomment_id"
+    t.text     "body"
+    t.integer  "task_id"
+    t.integer  "user_id"
+    t.integer  "supercomment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "comments", ["supercomment_id"], name: "index_comments_on_supercomment_id", using: :btree

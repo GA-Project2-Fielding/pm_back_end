@@ -2,8 +2,8 @@ class ProjectsController < ApplicationController
   before_filter :authenticate
 
   def index
-    @user = User.find(params[:user_id])
-    @projects = @user.projects
+    @projects = User.find(params[:user_id]).projects
+    # @projects = @user.projects
     render json: @projects, status: 200
   end
 
