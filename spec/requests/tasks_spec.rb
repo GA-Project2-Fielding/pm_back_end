@@ -4,6 +4,7 @@ require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 
 describe 'Tasks requests' do
+
   before(:all) do
     DatabaseCleaner.clean
     @users = FactoryGirl.create_list(:user, 5)
@@ -65,6 +66,13 @@ describe 'Tasks requests' do
     end
   end
 
-
+  describe '#destroy' do
+    it 'should destroy a task' do
+      tasks_count = @project.tasks.length
+      delete "/tasks/#{@task.id}"
+      expect(response.status).to eq 204
+      expect(Task.all).not_to include @task
+    end
+  end
 
 end
