@@ -1,6 +1,6 @@
 require 'rails_helper'
 require 'database_cleaner'
-
+require 'byebug'
 DatabaseCleaner.strategy = :truncation
 
 describe 'Comments Requests' do
@@ -15,7 +15,8 @@ describe 'Comments Requests' do
     it 'should return the comments associated with a task' do
       @task = @tasks.first
       @task.comments << FactoryGirl.create_list(:comment, 5)
-      get "/tasks/#{@task.id}/comments"
+      get "/tasks/#{@task.id}/comments", nil, {'authorization' => "Token token=#{@users.first.token}"}
+
       expect(response).to be_success
       comments_json = JSON.parse(response.body)
       expect(comments_json.length).to eq 5
@@ -25,7 +26,7 @@ describe 'Comments Requests' do
   describe '#show' do
     it 'should retrieve a single comment by id and return json' do
       @comment = @comments.first
-      get "/comments/#{@comment.id}"
+      get "/comments/#{@comment.id}", nil, {'authorization' => "Token token=#{@users.first.token}"}
       expect(response).to be_success
       comment = JSON.parse(response.body)
       expect(comment['body']).to eq @comment.body

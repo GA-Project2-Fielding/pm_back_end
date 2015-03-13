@@ -8,4 +8,8 @@ class Comment < ActiveRecord::Base
 
   has_many :subcomments, class_name: "Comment", foreign_key: "supercomment_id"
   belongs_to :supercomment, class_name: "Comment"
+
+  def new_subcomment(comment_params)
+
+  end
 end

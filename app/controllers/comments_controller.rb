@@ -1,3 +1,4 @@
+require 'byebug'
 class CommentsController < ApplicationController
   before_filter :authenticate
 
@@ -17,6 +18,18 @@ class CommentsController < ApplicationController
       render json: @comment, status: :created, location: @comment
     else
       render json: @comment.errors, status: :unprocessable_entity
+    end
+  end
+
+  def subcomments
+    @subcomment = Comment.find(params[:id]).new_subcomment(comment_params)
+
+    byebug
+
+    if @subcomment.save
+      render json: @subcomment, status: :created, location: @subtask
+    else
+      render json: @subtask.errors, status: :unprocessable_entity
     end
   end
 
