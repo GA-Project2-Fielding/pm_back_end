@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate
+
   def index
     @user = User.find(params[:user_id])
     @projects = @user.projects
