@@ -29,10 +29,10 @@ class Task <ActiveRecord::Base
     title = task_params['title']
     description = task_params['description']
 
-    due_date_date = DateTime.strptime(due_date, '%Y-%m-%d %T')
+    date_time = DateTime.strptime(due_date, '%Y-%m-%d %T')
 
     id = self.project_id
-    self.subtasks.new(due_date: DateTime.now, title: title, completed: completed, description:description, project_id: id)
+    self.subtasks.new(due_date: date_time, title: title, completed: completed, description:description, project_id: id)
   end
 
    def subtask?
