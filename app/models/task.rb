@@ -25,4 +25,8 @@ class Task <ActiveRecord::Base
     id = self.project_id
     self.subtasks.create(title: title, due_date: due_date, project_id: id, completed: completed, priority: priority, description: description)
   end
+
+   def subtask?
+    self.supertask_id == nil
+  end
 end
