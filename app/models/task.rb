@@ -20,4 +20,9 @@ class Task <ActiveRecord::Base
     self.priority ||= 0
     self.completed = false if self.completed.nil?
   end
+
+  def create_subtask(title, due_date, completed: false, priority: 0, description: nil)
+    id = self.project_id
+    self.subtasks.create(title: title, due_date: due_date, project_id: id, completed: completed, priority: priority, description: description)
+  end
 end
