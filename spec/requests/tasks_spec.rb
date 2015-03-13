@@ -30,10 +30,25 @@ describe 'Tasks requests' do
       expect(task_json['id']).to eq @task.id
       expect(task_json['completed']).to eq @task.completed
       expect(task_json['priority']).to eq @task.priority
-      expect(task_json['priority']).to eq @task.priority
-      expect(task_json['title']).to eq @task.title
       expect(task_json['title']).to eq @task.title
       expect(task_json['description']).to eq @task.description
+    end
+  end
+
+  describe '#create' do
+    it 'should create a new task associated with a project' do
+      post "/projects/#{@project.id}/tasks",
+      { task: { due_date: '2015-12-12', completed: false, priority: 5, title: 'task title', description: 'task description' }
+      }.to_json,
+      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+      expect(response).to be_success
+      expect(response.content_type).to be Mime::JSON
+      task_json = JSON.parse(response.body)
+      expect(task_json['id']).to eq @project.tasks.last.id
+      expect(task_json['completed']).to eq false
+      expect(task_json['priority']).to eq 5
+      expect(task_json['title']).to eq 'task title'
+      expect(task_json['description']).to eq 'task description'
     end
   end
 
