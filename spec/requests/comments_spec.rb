@@ -18,5 +18,15 @@ describe 'Comments Requests' do
     end
   end
 
+  describe '#show' do
+    it 'should retrieve a single comment by id and return json' do
+      @comment = @comments.first
+      get "/comments/#{@comment.id}"
+      expect(response).to be_success
+      comment = JSON.parse(response.body)
+      expect(comment['body']).to eq @comment.body
+    end
+  end
+
 end
 
