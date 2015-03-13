@@ -37,7 +37,7 @@ describe 'Comments Requests' do
     post "/tasks/#{@tasks.first.id}/comments",
     { comment: { body: 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.', user_id: @users.first.id }
       }.to_json,
-      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s, 'authorization' => "Token token=#{@users.first.token}" }
       expect(response).to be_success
       expect(response.content_type).to be Mime::JSON
       comment = JSON.parse(response.body)
@@ -53,7 +53,7 @@ describe 'Comments Requests' do
       patch "/comments/#{@comment.id}",
       { comment: { body: 'Donec sed odio dui.' }
       }.to_json,
-      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s }
+      { 'Accept' => Mime::JSON, 'Content-Type' => Mime::JSON.to_s, 'authorization' => "Token token=#{@users.first.token}" }
       expect(response).to be_success
       expect(response.content_type).to be Mime::JSON
       comment = JSON.parse(response.body)
@@ -64,7 +64,7 @@ describe 'Comments Requests' do
   describe '#destroy' do
     it 'should destroy a comment' do
       @comment = @comments.first
-      delete "/comments/#{@comment.id}"
+      delete "/comments/#{@comment.id}", nil, {'authorization' => "Token token=#{@users.first.token}"}
       expect(response.status).to eq 204
       expect(Comment.all).not_to include @comment
     end
