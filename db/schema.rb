@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20150312204753) do
     t.boolean  "completed",       default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "visible",         default: false, null: false
+    t.boolean  "visible",         default: true,  null: false
   end
 
   create_table "tasks", force: :cascade do |t|
