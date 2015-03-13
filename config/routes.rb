@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   shallow do
-    resources :users, except: [:new, :edit] do
+    resources :users, except: [:index, :new, :edit] do
       resources :projects, except: [:new, :edit] do
         resources :tasks, except: [:new, :edit] do
           resources :files, except: [:new, :edit, :update]
