@@ -68,12 +68,8 @@ describe 'Tasks requests' do
 
   describe '#destroy' do
     it 'should destroy a task' do
-<<<<<<< HEAD
-      delete "/tasks/#{@task.id}"
-=======
-      tasks_count = @project.tasks.length
       delete "/tasks/#{@task.id}", nil, {'authorization' => "Token token=#{@users.first.token}"}
->>>>>>> added Authorization token to request headers for project and task specs
+
       expect(response.status).to eq 204
       expect(Task.all).not_to include @task
     end
