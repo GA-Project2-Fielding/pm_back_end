@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :authenticate
+  # before_filter :authenticate
 
   def index
     @comments = Task.find(params[:task_id]).comments
