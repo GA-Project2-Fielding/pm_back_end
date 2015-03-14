@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
 
   def subcomments
     @subcomment = Comment.find(params[:id]).new_subcomment(comment_params)
-    @subcomment.user_id = 25
+    @subcomment.user_id = @current_user.id
 
     if @subcomment.save
       redirect_to action: :show
