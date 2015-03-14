@@ -1,4 +1,3 @@
-require 'byebug'
 class CommentsController < ApplicationController
   before_filter :authenticate
 
@@ -14,6 +13,8 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Task.find(params[:task_id]).comments.new(comment_params)
+    @comment.user_id = @current_user.id
+
     if @comment.save(comment_params)
       render json: @comment, status: :created, location: @comment
     else
@@ -23,8 +24,6 @@ class CommentsController < ApplicationController
 
   def subcomments
     @subcomment = Comment.find(params[:id]).new_subcomment(comment_params)
-
-    byebug
 
     if @subcomment.save
       render json: @subcomment, status: :created, location: @subtask
