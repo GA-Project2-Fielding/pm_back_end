@@ -22,6 +22,16 @@ class CommentsController < ApplicationController
     end
   end
 
+  def subcomments
+    @subcomment = Comment.find(params[:id]).new_subcomment(comment_params)
+
+    if @subcomment.save
+      render json: @subcomment, status: :created, location: @subtask
+    else
+      render json: @subtask.errors, status: :unprocessable_entity
+    end
+  end
+
   def update
     @comment = Comment.find(params[:id])
     if @comment.update(comment_params)
