@@ -13,6 +13,6 @@ class Comment < ActiveRecord::Base
     body = comment_params['body']
 
     task_id = self.task_id
-    self.subcomment.new(body: body, task_id: task_id)
+    self.subcomments.new(body: body, task_id: task_id)
   end
 end

@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :authenticate
+  # before_filter :authenticate
 
   def index
     @comments = Task.find(params[:task_id]).comments
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
 
   def subcomments
     @subcomment = Comment.find(params[:id]).new_subcomment(comment_params)
-    @subcomment.user_id = @current_user.id
+    @subcomment.user_id = 25
 
     if @subcomment.save
       render json: @subcomment, status: :created, location: @subtask
