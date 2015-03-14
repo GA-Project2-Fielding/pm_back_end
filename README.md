@@ -1,6 +1,7 @@
 Database ERD:
 
-![ga-project2 revised erd](https://cloud.githubusercontent.com/assets/9356738/6609330/6cad3a18-c826-11e4-9e80-dc8986ea2406.png)
+![ga-project2 revised erd - new page](https://cloud.githubusercontent.com/assets/9356738/6652260/73bbaa54-ca3f-11e4-9f5f-ffe5a47715a6.png)
+
 
 
 DataTypes:
