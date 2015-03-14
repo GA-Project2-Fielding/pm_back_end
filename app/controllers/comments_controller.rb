@@ -24,11 +24,12 @@ class CommentsController < ApplicationController
 
   def subcomments
     @subcomment = Comment.find(params[:id]).new_subcomment(comment_params)
+    @subcomment.user_id = @current_user.id
 
     if @subcomment.save
-      render json: @subcomment, status: :created, location: @subtask
+      redirect_to action: :show
     else
-      render json: @subtask.errors, status: :unprocessable_entity
+      render json: @subcomment.errors, status: :unprocessable_entity
     end
   end
 

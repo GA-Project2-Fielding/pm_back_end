@@ -10,6 +10,9 @@ class Comment < ActiveRecord::Base
   belongs_to :supercomment, class_name: "Comment"
 
   def new_subcomment(comment_params)
+    body = comment_params['body']
 
+    task_id = self.task_id
+    self.subcomments.new(body: body, task_id: task_id)
   end
 end
