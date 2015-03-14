@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  # before_filter :authenticate
+  before_filter :authenticate
 
   def index
     @comments = Task.find(params[:task_id]).comments
@@ -27,9 +27,9 @@ class CommentsController < ApplicationController
     @subcomment.user_id = 25
 
     if @subcomment.save
-      render json: @subcomment, status: :created, location: @subtask
+      redirect_to action: :show
     else
-      render json: @subtask.errors, status: :unprocessable_entity
+      render json: @subcomment.errors, status: :unprocessable_entity
     end
   end
 
