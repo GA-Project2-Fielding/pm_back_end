@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :authenticate, only: [:show, :update, :destroy]
 
   def sign_in
     user = User.find_by(email: params[:email])
