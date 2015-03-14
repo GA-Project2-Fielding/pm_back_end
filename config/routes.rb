@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   shallow do
-    resources :users, defaults: {format: :json},except: [:index, :new, :edit] do
+    resources :users, defaults: {format: :json}, except: [:index, :new, :edit] do
       post 'sign_in', on: :collection
       resources :projects, except: [:new, :edit] do
         resources :tasks, except: [:new, :edit]do
