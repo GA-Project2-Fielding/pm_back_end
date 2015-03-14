@@ -9,11 +9,6 @@ FactoryGirl.define do
     completed false
     visible false
 
-    trait :with_user do
-        after(:create) do |project|
-        project.users << create(:user)
-        end
-    end
   end
 end
 
