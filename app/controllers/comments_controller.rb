@@ -24,6 +24,7 @@ class CommentsController < ApplicationController
 
   def subcomments
     @subcomment = Comment.find(params[:id]).new_subcomment(comment_params)
+    @subcomment.user_id = @current_user.id
 
     if @subcomment.save
       render json: @subcomment, status: :created, location: @subtask

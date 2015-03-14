@@ -10,6 +10,6 @@ class Comment < ActiveRecord::Base
   belongs_to :supercomment, class_name: "Comment"
 
   def new_subcomment(comment_params)
-
+    body = comment_params['body']
   end
 end
