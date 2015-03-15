@@ -9,7 +9,7 @@ class CreateTasks < ActiveRecord::Migration
       t.belongs_to :project, index: true
       t.references :supertask, index: true
 
-      t.timestamps
+      t.timestamps null: false
     end
     add_foreign_key :tasks, :projects
   end

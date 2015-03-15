@@ -5,7 +5,7 @@ class CreateFileLocations < ActiveRecord::Migration
       t.string :url, null: false
       t.belongs_to :task, index: true
 
-      t.timestamps
+      t.timestamps null: false
     end
     add_foreign_key :file_locations, :tasks
   end
