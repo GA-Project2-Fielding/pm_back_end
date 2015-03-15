@@ -8,7 +8,7 @@ class CreateProjects < ActiveRecord::Migration
       t.datetime :completion_date
       t.boolean :completed, null: false, default: false
 
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end

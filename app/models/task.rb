@@ -3,6 +3,7 @@ class Task < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :user_tasks
   has_many :users, through: :user_tasks
+  has_many :file_locations # not sure how dependent: :destroy would work with AWS S3?
 
   has_many :subtasks, class_name: "Task", foreign_key: "supertask_id"
   belongs_to :supertask, class_name: "Task"
