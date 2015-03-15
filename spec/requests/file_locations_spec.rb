@@ -36,4 +36,29 @@ describe 'FileLocations requests' do
       expect(file_location_json['task']['id']).to eq @file_location.task_id
     end
   end
+
+  describe '#create' do
+    it 'should create a new file_location associated with a task' do
+      post_object =
+      {
+        file_location:
+        {
+          name: Faker::Lorem.word,
+          url: Faker::Internet.url
+        }
+      }
+      post "/tasks/#{@task.id}/file_locations", post_object.to_json,
+      {
+        accept: Mime::JSON, 'Content-Type' => Mime::JSON.to_s, authorization: "Token token=#{@user.token}"
+      }
+      file_location_json = JSON.parse(response.body)
+
+      expect(response).to be_success
+      expect(response.content_type).to be Mime::JSON
+      expect(file_location_json['id']).to eq @file_locations.last.id
+      expect(file_location_json['name']).to eq post_object[:file_location][:name]
+      expect(file_location_json['url']).to eq post_object[:file_location][:url]
+    end
+  end
+
 end
