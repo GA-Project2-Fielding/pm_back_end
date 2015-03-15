@@ -24,4 +24,16 @@ describe 'FileLocations requests' do
       expect(file_locations_json.length).to eq 2
     end
   end
+
+  describe '#show' do
+    it 'should retrieve a single file_location by id and return json' do
+      get "/file_locations/#{@file_location.id}", nil, {authorization: "Token token=#{@user.token}"}
+      expect(response).to be_success
+      file_location_json = JSON.parse(response.body)
+      expect(file_location_json['id']).to eq @file_location.id
+      expect(file_location_json['name']).to eq @file_location.name
+      expect(file_location_json['url']).to eq @file_location.url
+      expect(file_location_json['task']['id']).to eq @file_location.task_id
+    end
+  end
 end
