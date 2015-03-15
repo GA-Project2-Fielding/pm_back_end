@@ -11,7 +11,7 @@ describe 'Projects Requests' do
   end
 
   describe '#index' do
-    it 'should return the comments associated with a task' do
+    it 'should return the projects associated with a user' do
       @user = @users.first
       @user.projects << FactoryGirl.create_list(:project, 5)
       get "/users/#{@user.id}/projects", nil, {'authorization' => "Token token=#{@users.first.token}"}
