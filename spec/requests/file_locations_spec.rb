@@ -61,4 +61,14 @@ describe 'FileLocations requests' do
     end
   end
 
+  describe '#destroy' do
+    it 'should destroy a file_location' do
+      expect(FileLocation.all).to include @file_location
+      delete "/file_locations/#{@file_location.id}", nil, { authorization: "Token token=#{@user.token}" }
+
+      expect(response.status).to eq 204
+      expect(FileLocation.all).not_to include @file_location
+    end
+  end
+
 end
