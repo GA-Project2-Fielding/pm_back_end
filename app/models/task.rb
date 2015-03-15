@@ -38,4 +38,8 @@ class Task < ActiveRecord::Base
     id = self.project_id
     self.subtasks.create(due_date: date_time, title: title, project_id: id)
   end
+
+  def seed_comment(body, user_id)
+    self.comments.create(body: body, user_id: user_id)
+  end
 end

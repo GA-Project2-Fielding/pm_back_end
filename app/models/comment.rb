@@ -15,4 +15,9 @@ class Comment < ActiveRecord::Base
     task_id = self.task_id
     self.subcomments.new(body: body, task_id: task_id)
   end
+
+  def seed_subcomment(body, user_id)
+    task_id = self.task_id
+    self.subcomments.create(body: body, user_id: user_id, task_id: task_id)
+  end
 end
