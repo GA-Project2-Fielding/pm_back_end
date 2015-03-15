@@ -7,7 +7,7 @@ Rails.application.routes.draw do
           member do
             post 'subtasks'
           end
-          resources :files, except: [:new, :edit, :update]
+          resources :file_locations, except: [:new, :edit, :update] # not sure how update might work with AWS S3
           resources :comments, except: [:new, :edit]do
             member do
               post 'subcomments'
