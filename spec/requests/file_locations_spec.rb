@@ -4,7 +4,7 @@ require 'database_cleaner'
 DatabaseCleaner.strategy = :truncation
 
 describe 'FileLocations requests' do
-  before(:all) do
+    before(:all) do
     DatabaseCleaner.clean
     @user = FactoryGirl.create(:user)
     @user.projects << FactoryGirl.create_list(:project, 2)
@@ -19,8 +19,9 @@ describe 'FileLocations requests' do
   describe '#index' do
     it 'gets all the file_locations for a task' do
       get "/tasks/#{@task.id}/file_locations", nil, {'authorization' => "Token token=#{@user.token}"}
-      expect(response).to be_success
       file_locations_json = JSON.parse(response.body)
+
+      expect(response).to be_success
       expect(file_locations_json.length).to eq 2
     end
   end
@@ -28,8 +29,9 @@ describe 'FileLocations requests' do
   describe '#show' do
     it 'should retrieve a single file_location by id and return json' do
       get "/file_locations/#{@file_location.id}", nil, {authorization: "Token token=#{@user.token}"}
-      expect(response).to be_success
       file_location_json = JSON.parse(response.body)
+
+      expect(response).to be_success
       expect(file_location_json['id']).to eq @file_location.id
       expect(file_location_json['name']).to eq @file_location.name
       expect(file_location_json['url']).to eq @file_location.url
