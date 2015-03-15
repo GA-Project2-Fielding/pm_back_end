@@ -11,10 +11,14 @@ describe 'Projects Requests' do
   end
 
   describe '#index' do
-    it 'gets all the projects for a user' do
+    it 'should return the comments associated with a task' do
       @user = @users.first
+      @user.projects << FactoryGirl.create_list(:project, 5)
       get "/users/#{@user.id}/projects", nil, {'authorization' => "Token token=#{@users.first.token}"}
+
       expect(response).to be_success
+      projects_json = JSON.parse(response.body)
+      expect(projects_json.length).to eq 5
     end
   end
 
