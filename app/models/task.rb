@@ -33,4 +33,9 @@ class Task < ActiveRecord::Base
     id = self.project_id
     self.subtasks.new(due_date: date_time, title: title, completed: completed, description:description, project_id: id)
   end
+
+  def seed_subtask(date_time, title)
+    id = self.project_id
+    self.subtasks.create(due_date: date_time, title: title, project_id: id)
+  end
 end
