@@ -4,7 +4,7 @@ User.destroy_all
 Project.destroy_all
 
 # Creating two Users
-users = User.create([{user_name: 'bbob', email: 'fake@fake.com', first_name: 'Bill', last_name: 'Bob', password: 'Kitty', token: 'token'}, {user_name: 'ab111', email: 'not@real.com', first_name: 'Brad', last_name: 'Pitt', password: 'password', token: 'token'}])
+users = User.create([{user_name: 'bbob', email: 'fake@fake.com', first_name: 'Bill', last_name: 'Bob', password: 'Kitty'}, {user_name: 'ab111', email: 'not@real.com', first_name: 'Brad', last_name: 'Pitt', password: 'password'}])
 
 # Creating two Projects, one for each user
 User.all[0].projects.create(project_title: 'makin cakes', start_date: DateTime.now)
