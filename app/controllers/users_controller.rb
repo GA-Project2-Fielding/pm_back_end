@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       render json: {token: @user.token, id: @user.id}
     else
-      render json: {message: 'failed', status: 500}
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
