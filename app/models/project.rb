@@ -13,4 +13,8 @@ class Project < ActiveRecord::Base
    self.completed = false if self.completed.nil?
    self.visible = true if self.visible.nil?
   end
+
+  def add_creator(user_id)
+     self.users << User.find(user_id)
+  end
 end

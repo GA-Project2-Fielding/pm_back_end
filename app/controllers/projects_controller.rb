@@ -13,8 +13,9 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = User.find(params[:user_id]).projects.new(project_params)
+    @project = Project.new(project_params)
     if @project.save
+      @project.add_creator(params[:user_id])
       render json: @project, status: :created
     else
       render json: @project.errors, status: :unprocessable_entity
