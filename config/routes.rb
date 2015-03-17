@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/amazon/sign_key/:id', to: 'amazon#sign_key'
   shallow do
     resources :users, defaults: {format: :json}, except: [:index, :new, :edit] do
       post 'sign_in', on: :collection
