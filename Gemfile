@@ -9,6 +9,7 @@ ruby '2.2.0'
   gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
   gem 'nokogiri'
   gem 'bcrypt-ruby', '~> 3.1.5'
+  gem 'aws-sdk', '~> 2'
 group :development, :test do
   gem 'capybara'
   gem 'rubocop'
