@@ -1,5 +1,5 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :body, :created_at
+  attributes :id, :body, :created_at, :supercomment_id
 
   belongs_to :user
   belongs_to :task
