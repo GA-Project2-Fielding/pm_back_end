@@ -28,10 +28,11 @@ class Task < ActiveRecord::Base
     title = task_params['title']
     description = task_params['description']
 
-    date_time = DateTime.strptime(due_date, '%Y-%m-%d %T')
+    # Causing an error when creating new subtask from json
+    # date_time = DateTime.strptime(due_date, '%Y-%m-%d %T')
 
     id = self.project_id
-    self.subtasks.new(due_date: date_time, title: title, completed: completed, description:description, project_id: id)
+    self.subtasks.new(due_date: due_date, title: title, completed: completed, description:description, project_id: id)
   end
 
   def seed_subtask(date_time, title)
