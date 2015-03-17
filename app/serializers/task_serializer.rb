@@ -1,5 +1,5 @@
 class TaskSerializer < ActiveModel::Serializer
-  attributes :id, :due_date, :completed, :priority, :title, :description, :created_at
+  attributes :id, :due_date, :completed, :priority, :title, :description, :created_at, :supertask_id
 
   has_many :comments
   has_many :user_tasks
