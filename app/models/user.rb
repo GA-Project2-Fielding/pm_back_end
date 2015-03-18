@@ -16,10 +16,16 @@ class User < ActiveRecord::Base
 
   before_create :generate_token
 
+  after_initialize :defaults
+
   def generate_token
     return if token.present?
     begin
       self.token = SecureRandom.uuid.gsub(/\-/, '')
     end while self.class.exists?(token: token)
+  end
+
+  def defaults
+    self.image_url ||= "https://s3.amazonaws.com/team-fielding/uploads/77377415-b0f6-421d-bdd0-20797e3a102a"
   end
 end
