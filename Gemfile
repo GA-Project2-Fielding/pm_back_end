@@ -11,6 +11,7 @@ ruby '2.2.0'
   gem 'bcrypt-ruby', '~> 3.1.5'
   gem 'aws-sdk'
   gem 'paperclip', "~> 4.2"
+  gem 'coveralls', require: false
 group :development, :test do
   gem 'capybara'
   gem 'rubocop'
